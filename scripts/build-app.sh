@@ -10,8 +10,12 @@
 # macOS 15 with the system Python 3.9 toolchain — it builds for a 10.9 target
 # and dyld rejects the 15.x universal2 wheels.)
 #
-#   scripts/build-app.sh            # build + install to /Applications
+#   scripts/build-app.sh             # build dist/EagleEye.app only
+#   scripts/build-app.sh --install   # build + install to /Applications
 set -euo pipefail
+
+INSTALL=0
+[ "${1:-}" = "--install" ] && INSTALL=1
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PY="$ROOT/.venv/bin/python"
@@ -40,6 +44,11 @@ echo "==> marking as a menu-bar agent (LSUIElement)"
 
 echo "==> ad-hoc code-signing (stable TCC identity)"
 codesign --force --deep -s - "$APP_SRC"
+
+if [ "$INSTALL" -eq 0 ]; then
+  echo "Done. $APP_SRC built (not installed)."
+  exit 0
+fi
 
 echo "==> installing to /Applications"
 rm -rf "$APP_DST"
