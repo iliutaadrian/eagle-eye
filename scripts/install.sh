@@ -30,17 +30,7 @@ else
 fi
 
 echo "==> nvim plugin (mode-aware logging)"
-if [ -d "$HOME/.config/nvim" ]; then
-  mkdir -p "$HOME/.config/nvim/lua"
-  cp "$ROOT/editor/nvim/keylog.lua" "$HOME/.config/nvim/lua/eagleeye.lua"
-  INIT="$HOME/.config/nvim/init.lua"
-  if [ -f "$INIT" ] && ! grep -q 'require("eagleeye")' "$INIT"; then
-    printf '\n-- Eagle Eye keystroke logger\nrequire("eagleeye")\n' >> "$INIT"
-  fi
-  echo "    installed to ~/.config/nvim/lua/eagleeye.lua"
-else
-  echo "    no ~/.config/nvim — skipped (optional)"
-fi
+"$ROOT/editor/nvim/install.sh" | sed 's/^/    /'
 
 echo
 echo "Done."
