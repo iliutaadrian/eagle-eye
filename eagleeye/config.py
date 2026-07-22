@@ -10,7 +10,7 @@ except ModuleNotFoundError:  # pragma: no cover
 
 DEFAULTS = {
     "paths": {
-        "data_dir": "~/Library/Application Support/EagleEye",
+        "data_dir": "~/Documents/EagleEye",
     },
     "capture": {
         "poll_interval": 1.5,     # app-usage sampler poll (seconds)

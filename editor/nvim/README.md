@@ -4,7 +4,7 @@ Mode-aware keystroke logger. The OS keylogger sees nvim keys but not the *mode*
 (normal/insert/visual). This plugin adds that context, which is the most useful
 signal for editing-workflow analysis.
 
-It writes to `~/Library/Application Support/EagleEye/nvim-YYYY-MM-DD.log`; the app
+It writes to `~/Documents/EagleEye/nvim-YYYY-MM-DD.log`; the app
 tails that file into the database automatically.
 
 ## Install

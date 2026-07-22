@@ -8,11 +8,11 @@
 --   cp editor/nvim/keylog.lua ~/.config/nvim/lua/eagleeye.lua
 --   add to init.lua:  require("eagleeye")
 --
--- Writes to: ~/Library/Application Support/EagleEye/nvim-YYYY-MM-DD.log
+-- Writes to: ~/Documents/EagleEye/nvim-YYYY-MM-DD.log
 
 local M = {}
 
-local dir = vim.fn.expand("~/Library/Application Support/EagleEye")
+local dir = vim.fn.expand("~/Documents/EagleEye")
 vim.fn.mkdir(dir, "p")
 
 local function path()

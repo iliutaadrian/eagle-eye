@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Eagle Eye uninstaller. Removes the app, LaunchAgent, and nvim plugin.
-# Your captured data in ~/Library/Application Support/EagleEye is kept unless
+# Your captured data in ~/Documents/EagleEye is kept unless
 # you pass --purge.
 #
 #   scripts/uninstall.sh            # remove app + autostart + nvim plugin
@@ -26,11 +26,11 @@ INIT="$HOME/.config/nvim/init.lua"
 
 if [ "$PURGE" = "1" ]; then
   echo "==> purging data"
-  rm -rf "$HOME/Library/Application Support/EagleEye"
+  rm -rf "$HOME/Documents/EagleEye"
   rm -rf "$HOME/.config/eagleeye"
   echo "    all data deleted"
 else
-  echo "Data kept: ~/Library/Application Support/EagleEye  (use --purge to delete)"
+  echo "Data kept: ~/Documents/EagleEye  (use --purge to delete)"
 fi
 
 echo "Done."
