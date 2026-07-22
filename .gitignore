@@ -23,3 +23,7 @@ __pycache__/
 
 # PyInstaller
 *.spec
+
+# macOS + icon build intermediates
+.DS_Store
+assets/icon/*.iconset/

@@ -30,6 +30,7 @@ echo "==> building EagleEye.app (PyInstaller)"
 cd "$ROOT"
 rm -rf build dist EagleEye.spec
 "$ROOT/.venv/bin/pyinstaller" --noconfirm --clean --windowed --name EagleEye \
+  --icon "$ROOT/EagleEye.icns" \
   --osx-bundle-identifier com.eagleeye.agent \
   --collect-all rumps --collect-all pynput --collect-all PIL \
   --collect-submodules Quartz --collect-submodules AppKit \
