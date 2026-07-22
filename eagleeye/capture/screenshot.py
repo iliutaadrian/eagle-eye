@@ -47,6 +47,8 @@ class ScreenShooter(threading.Thread):
         self._workers_n = int(sc.get("describe_workers", 3))
         self._model = cfg.get("analysis", "model", default="haiku")
         self._flags = cfg.get("analysis", "claude_flags", default=[]) or []
+        from ..permissions import find_claude
+        self._claude = find_claude() or "claude"
         # Dedup: drop a frame that's perceptually identical to the last kept one
         # (no JPEG kept, no caption) — saves disk + the headless Claude call.
         self._dedup = bool(sc.get("dedup", True))
@@ -116,7 +118,7 @@ class ScreenShooter(threading.Thread):
                                         title=title or "")
             try:
                 out = subprocess.check_output(
-                    ["claude", "-p", prompt, "--model", self._model, *self._flags],
+                    [self._claude, "-p", prompt, "--model", self._model, *self._flags],
                     text=True, timeout=120, stderr=subprocess.DEVNULL,
                     env=clean_env(_HEADLESS),
                 ).strip()

@@ -165,4 +165,24 @@ def run(cfg):
             NSApplicationActivationPolicyAccessory)
     except Exception:
         pass
+
+    # Gate on Accessibility: without it there is no window-title context, so the
+    # tracker is not useful. Prompt, tell the user how to grant, then exit.
+    from . import permissions
+    if not permissions.accessibility_trusted(prompt=True):
+        rumps.alert(
+            title=f"{__app_name__} needs Accessibility",
+            message="Enable Eagle Eye under System Settings > Privacy & Security "
+                    "> Accessibility, then launch it again.")
+        return
+
+    # Captions + analysis shell out to the `claude` CLI. Warn (non-fatal) if it
+    # isn't installed — usage/keystroke tracking still works without it.
+    if permissions.find_claude() is None:
+        rumps.alert(
+            title=f"{__app_name__}: Claude Code not found",
+            message="Install the `claude` CLI (npm i -g @anthropic-ai/claude-code) "
+                    "for screenshot captions and analysis. Tracking runs without "
+                    "it; set EAGLEEYE_CLAUDE_BIN to override the path.")
+
     EagleEyeApp(cfg).run()

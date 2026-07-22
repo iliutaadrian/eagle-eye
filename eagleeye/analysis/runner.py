@@ -4,6 +4,7 @@ update the observations ledger with detected inefficiencies + suggestions.
 
 import subprocess
 
+from ..permissions import find_claude
 from ..subproc import clean_env
 from . import compile as comp
 from . import ledger
@@ -37,7 +38,7 @@ def run(cfg, day: str):
         ledger=ledger.ledger_path(cfg),
     )
     result = subprocess.run(
-        ["claude", "-p", prompt, "--model", model, *flags],
+        [find_claude() or "claude", "-p", prompt, "--model", model, *flags],
         cwd=str(cfg.data_dir), text=True, capture_output=True, timeout=600,
         env=clean_env({"EAGLEEYE_HEADLESS": "1"}),
     )
