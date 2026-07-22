@@ -1,0 +1,22 @@
+# Eagle Eye — build backend + tooling config.
+# Package metadata and dependencies live in setup.py; the macOS .app is built by
+# scripts/build-app.sh (PyInstaller). This file holds the build backend + linters.
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 90
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+# dashboard.py embeds a large HTML/CSS template string; don't wrap CSS lines.
+"eagleeye/analysis/dashboard.py" = ["E501"]
+
+[tool.black]
+line-length = 90
+target-version = ["py39"]

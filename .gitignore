@@ -1,0 +1,25 @@
+# Captured data never belongs in the repo (it lives in the app data dir anyway)
+# ~/Library/Application Support/EagleEye/  — not in-tree, but ignore stray copies:
+eagleeye.db*
+screens/
+tracking-*.md
+desc-*.jsonl
+all-*.log
+nvim-*.log
+*.pid
+
+# local config / runtime overrides
+config.toml
+overrides.json
+
+# python / build
+.venv/
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.pyc
+.ruff_cache/
+
+# PyInstaller
+*.spec
